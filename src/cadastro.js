@@ -1,22 +1,24 @@
-// Função para calcular idade em meses
+//arrow function, onde sua função vai ser direcioada a calcular idade em meses
 const calcularIdadeEmMeses = (dataPlantio) => {
-    let dataInicial = new Date(dataPlantio);
-    let hoje = new Date();
+    let dataInicial = new Date(dataPlantio);//converte a data de plantio em objeto
+    let hoje = new Date();//pega a data atual do sistema
   
-    let anos = hoje.getFullYear() - dataInicial.getFullYear();
-    let meses = hoje.getMonth() - dataInicial.getMonth();
+    let anos = hoje.getFullYear() - dataInicial.getFullYear();//calcula data atual em anos com a data de plantio
+    let meses = hoje.getMonth() - dataInicial.getMonth();//calcula o mes atual com o mes do plantio
   
-    return anos * 12 + meses;
+    return anos * 12 + meses; //(anos * 12) transforma anos em meses , (+ meses) vai soma os meses restantes
   };
   
-  // Inserir card no container
-  const insertCard = (especie) => {
   
-    let container = document.getElementById('especiesContainer');
+  //arrow fuction , cria e inserir o card na tela
+  const insertCard = (especie) => { 
   
-    let idadeMeses = calcularIdadeEmMeses(especie.dataPlantio);
+    let container = document.getElementById('especiesContainer'); //puxa o container do HTML onde os cards serão inseridos
   
-    let card = `
+    let idadeMeses = calcularIdadeEmMeses(especie.dataPlantio); //calcula a idade da planta em meses
+
+  //cria o HTML do card
+    let card = ` 
       <div class="col-md-4 mb-4">
         <div class="card shadow h-100">
           <div class="card-body">
@@ -37,29 +39,34 @@ const calcularIdadeEmMeses = (dataPlantio) => {
       </div>
     `;
   
-    container.insertAdjacentHTML("beforeend", card);
+    container.insertAdjacentHTML("beforeend", card); //agrupa os cards
   };
   
-  // Buscar dados no LocalStorage
+  //buscar dados no localstorage
   let especies = JSON.parse(localStorage.getItem('especies')) ?? [];
   
-  // Renderizar página
+  //percorre cada item dentro array
   for (let especie of especies) {
     insertCard(especie);
   }
   
-  // Capturar formulário
+  // capturar formulário
   let especieForm = document.getElementById('especieForm');
   
-  especieForm.onsubmit = (event) => {
+  //arrow function, onde ela e executada quando o formulário é enviado ,ela e responsavel por controla todo o processo de cadastro
+  especieForm.onsubmit = (event) => { 
+
+  //impede o recarregamento da página
     event.preventDefault();
-  
+
+  //captura os valores digitados no formulário
     let identificador = Date.now(); // cria um ID automático
     let nomePopular = document.getElementById('nomePopular').value;
     let nomeCientifico = document.getElementById('nomeCientifico').value;
     let producaoMedia = document.getElementById('producaoMedia').value;
     let dataPlantio = document.getElementById('dataPlantio').value;
-  
+
+  //cria um objeto com os dados
     let especieJson = {
       identificador,
       nomePopular,
@@ -68,23 +75,26 @@ const calcularIdadeEmMeses = (dataPlantio) => {
       dataPlantio,
     };
   
-    especies.push(especieJson);
+    especies.push(especieJson);//adiciona no final do array
   
-    localStorage.setItem('especies', JSON.stringify(especies));
+    localStorage.setItem('especies', JSON.stringify(especies)); //salva no localstorage
   
-    insertCard(especieJson);
+    insertCard(especieJson); //cria o card na tela
   
-    // Reseta o formulário
+    //reseta o formulário
     especieForm.reset();
   
-    // Fechar modal
+    //funçao e fechar modal
+    //puxa o modal
     let modalElement = document.getElementById('especieModal');
+
+    //verifica se já existe um modal ativo
     let modal = bootstrap.Modal.getInstance(modalElement) 
                 || new bootstrap.Modal(modalElement);
   
-    modal.hide();
+    modal.hide(); // Fecha o modal
   
-    // Toast
+    //toast de confirmaçao de frutifera cadastrada
     Toastify({
       text: 'FRUTIFERA SALVA COM SUCESSO !!!!!',
       className: 'info',
