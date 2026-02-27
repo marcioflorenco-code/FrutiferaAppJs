@@ -15,7 +15,7 @@ const calcularIdadeEmMeses = (dataPlantio) => {
   
     let container = document.getElementById('especiesContainer'); //puxa o container do HTML onde os cards serão inseridos
   
-    let idadeMeses = calcularIdadeEmMeses(especie.dataPlantio); //calcula a idade da planta em meses
+    let idadeMeses = calcularIdadeEmMeses(especie.dataPlantio); //calcula a idade da plantio em meses
 
   //cria o HTML do card
     let card = ` 
@@ -103,3 +103,4 @@ const calcularIdadeEmMeses = (dataPlantio) => {
       },
     }).showToast();
   };
+
