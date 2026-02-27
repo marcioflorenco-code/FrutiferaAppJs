@@ -1,7 +1,7 @@
 // Conjunto dados para montar dinamicamente as estruras dos cards
 import informacoesCards from './dataset/informacao.js';
 
-// Essa função recebe um objeto "informacoesCard"  e monta um card usando template string.
+// arrow function , onde essa função recebe um objeto "informacoesCard"  e monta um card usando template string.
 let createInformacoesCard = (informacoesCard) => {
   let card = `<div class="col">
           <div class="card h-100">
@@ -17,7 +17,7 @@ let createInformacoesCard = (informacoesCard) => {
   return card;
 };
 
-// Essa função recebe o HTML do card já criado
+//arrow function,onde essa função recebe o HTML do card já criado
 let addInformacaoCard = (card) => {
 // Pega o elemento onde os cards serão inseridos
   let informacoesCardsRow = document.getElementById('informacoesCardsRow');
@@ -26,8 +26,7 @@ let addInformacaoCard = (card) => {
   informacoesCardsRow.insertAdjacentHTML('beforeend', card);
 };
 
-// Essa função percorre o array importado
-// cria cards dinamicamente.
+// arrow function , essa função percorre o array importado
 let loadInformacoesCards = () => {
   for (let informacoesCard of informacoesCards) {
     let card = createInformacoesCard(informacoesCard);
@@ -35,5 +34,5 @@ let loadInformacoesCards = () => {
   }
 };
 
-// loadInformacoesCards();
+// carrega os cards , quando carrega a pagina completa
 window.onload = loadInformacoesCards;
